@@ -377,12 +377,12 @@ Cluster Name: IBE-XENPOOL
 | ------------------------------| ------------| ----------------------------|
 | FreeNAS-Primary-Vol01 | PreSetup | nfs_primary_vol01 |
 
-####Secondary Storage 
+#### Secondary Storage 
 | Type |	Name |	Server|	Path|
 | -------| -----------------------------------| ------------------------| -----------------------------------------|
 | NFS |	FreeNAS-Secondary-Vol01 |	172.16.1.253 |	/mnt/tank/cs-secondary-vol01 |
 
-## Configuring CloudMonkey and jq
+## CloudMonkey
 
 ### Generating API Key and Secret Key 
 In order to use CloudMonkey, you need to generate an API key and a secret key of the admin account at first.
