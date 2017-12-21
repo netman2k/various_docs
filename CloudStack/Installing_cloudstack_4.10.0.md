@@ -1,8 +1,4 @@
-
-
-
-
-#CloudStack 4.10 with XenServer 7.0 Installation
+# CloudStack 4.10 with XenServer 7.0 Installation
 
 ## Physical Network Structure
 ![](images/cloudstack_architecture.png)
