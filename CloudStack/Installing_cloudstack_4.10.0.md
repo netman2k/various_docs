@@ -180,8 +180,10 @@ dhcpv6-client ipp-client mdns samba-client ssh
 #### Enable HTTP traffic in the public zone for accessing CloudStack management console
 by default, CloudStack management console uses 8080/tcp. so added 8080/tcp in the public zone as below:
 
-The Management Servers communicate with each other to coordinate tasks. This communication uses TCP on ports 8250 and 9090.
-The console proxy VMs connect to all hosts in the zone over the management traffic network. Therefore the management traffic network of any given pod in the zone must have connectivity to the management traffic network of all other pods in the zone.
+The Management Servers communicate with each other to coordinate tasks.
+This communication uses TCP on ports 8250 and 9090.
+The console proxy VMs connect to all hosts in the zone over the management traffic network. 
+Therefore the management traffic network of any given pod in the zone must have connectivity to the management traffic network of all other pods in the zone.
 The secondary storage VMs and console proxy VMs connect to the Management Server on port 8250. If you are using multiple Management Servers, the load balanced IP address of the Management Servers on port 8250 must be reachable.
 
 ```
