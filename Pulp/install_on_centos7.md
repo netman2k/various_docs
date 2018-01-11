@@ -2,6 +2,17 @@
 
 [Installation](http://docs.pulpproject.org/user-guide/installation/f23-.html)
 
+## Set Hostname
+```
+hostnamectl set-hostname pulp.<Your domain>
+```
+
+## Set SELinux
+```
+sed -i s/SELINUX=enforcing/SELINUX=permissive/g /etc/selinux/config
+setenforce 0
+```
+
 ## Install Pulp repository
 ```
 cat <<'EOF' > /etc/yum.repos.d/pulp.repo
@@ -92,7 +103,7 @@ mkdir ~/.pulp
 cat <<EOF > ~/.pulp/admin.conf 
 [server]
 verify_ssl = False
-host = pulp.localdomain
+host = $(hostname -f)
 
 [auth]
 username: admin
