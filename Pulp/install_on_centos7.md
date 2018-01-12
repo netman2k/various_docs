@@ -127,9 +127,11 @@ pulp-admin rpm repo sync run --repo-id=centos7_extras
 pulp-admin rpm repo sync run --repo-id=puppet5_el7
 ```
 ## (Optional) Allow HTTP access
-If you want serve your repositories via HTTP use this command
+If you want serve your repositories via HTTP after creating use these commands
 ```
-pulp-admin rpm repo update --serve-http=true --repo-id=<Repo ID>
+REPO_ID="centos7_os"
+pulp-admin rpm repo update --serve-http=true --repo-id=$REPO_ID
+pulp-admin rpm repo publish run --repo-id=$REPO_ID
 
 ```
 ## Access URL
