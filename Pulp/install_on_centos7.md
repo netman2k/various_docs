@@ -112,9 +112,9 @@ EOF
 
 chmod 600 ~/.pulp/admin.conf
 ```
-
+[Repositoies](https://docs.pulpproject.org/user-guide/admin-client/repositories.html)
 ## Create & Sync Repostories 
-http://docs.pulpproject.org/plugins/pulp_rpm/user-guide/quick-start.html
+[http://docs.pulpproject.org/plugins/pulp_rpm/user-guide/quick-start.html]
 
 ```
 pulp-admin rpm repo create --repo-id=centos7_os --relative-url=centos/7/os/x86_64 --feed=http://mirror.oasis.onnetcorp.com/centos/7/os/x86_64/
