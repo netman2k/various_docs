@@ -17,12 +17,14 @@ yum -y install foreman-release-scl
 Before running installer, you need to set the hostname properly.
 
 But you'd better set these on the DNS server you use.
+
 ```
 [root@localhost ~]# hostnamectl set-hostname capsule01.example.local
 [root@localhost ~]# systemctl restart systemd-hostnamed.service
 ```
 
 **On capsule**
+
 ```
 IP=$(ip addr |grep eth0: -A 2 | tail -n 1 | awk '{ gsub("/24","",$2); print $2 }')
 FQDN=$(hostname -f)
@@ -32,11 +34,12 @@ echo "${IP} ${FQDN} ${HOSTNAME}"  >> /etc/hosts
 echo "172.16.0.87 katello01.example.local katello.example.local katello foreman" >> /etc/hosts
 ```
 ***On Foreman/Katello***
+
 Foreman/Katello  and Capsules need to communicate each other, otherwise, the installation will fail.
 
 Therefore we should set capsule's host information on the katello server.
-
 eg) 172.16.0.77 capsule01.example.local
+
 ```
 echo "<CAPSULE SERVER IP> <CAPSULE SERVER FQDN>"  >> /etc/hosts
 ```
@@ -46,17 +49,21 @@ TODO
 
 ### Installation
 Install packages:
+
 ```
 yum -y install katello-capsule
 ```
 #### Fixes compatability issue with Puppet 4
+
 ```
 /opt/puppetlabs/puppet/bin/gem install yard
 source /etc/profile.d/puppet-agent.sh
 puppet module install puppetlabs/strings
 ```
+
 Generate a certificate for the new Capsule
 You need to generate a certificate for the new capsule server on the foreman/katello server as below.
+
 ```
  capsule-certs-generate --capsule-fqdn "<NEW CAPSULE's FQDN>" --certs-tar "~/<NEW CAPSULE's FQDN>.tar"
 ```
@@ -94,6 +101,7 @@ Installing             Done                                               [100%]
 ```
 #### Copy generated certificate file
 I used scp command to retrieve a file as below.
+
 ```
 cd ~/
 wget https://katello01.example.local/pub/`hostname -f`.tar --no-check-certificate 
@@ -102,13 +110,17 @@ wget https://katello01.example.local/pub/`hostname -f`.tar --no-check-certificat
 ### Register Capsule server to Foreman/Katello server.
 #### Install Foreman/Katello's CA certificate
 You need to install Foreman/Katello's CA certificate in the capsule server via this command
+
 ```
 yum install -y http://katello01.example.local/pub/katello-ca-consumer-latest.noarch.rpm
 ```
+
 #### Register the Capsule server
+
 ```
 subscription-manager register --org "Default_Organization"
 ```
+
 ```
 [root@capsule01 ~]# subscription-manager register --org "Default_Organization"
 Registering to: katello01.example.local:443/rhsm
@@ -128,10 +140,12 @@ puppet::server_puppetdb_host: puppetdb.example.local
 puppet::server::storeconfigs_backend: puppetdb
 puppetdb::master::config::strict_validation: false
 ```
+
 ### (Optional) Setting Alternative DNS names on Puppet certificate
 If you are willing to set common name for your servers, you should set the puppet::dns_alt_names hiera value in the hiera file (/usr/share/foreman-installer/config/foreman.hiera/RedHat.yaml).
 
 I found that there's no way to set alternative dns names via foreman-installer.
+
 ```
 puppet::dns_alt_names:
   - katello.example.local
@@ -145,6 +159,7 @@ puppet::dns_alt_names:
 
 > Note that
 If you were already installed capsule once, use this command to refresh your Puppet configuration
+
 ```
 foreman-installer --scenario capsule --upgrade-puppet
 ```
@@ -157,6 +172,7 @@ The oauth-consumer-key and oauth-consumer-secret can be retrieved from the Forem
 ![](images/2.png)
 
 Default way:
+
 ```
   foreman-installer --scenario capsule\
                     --capsule-parent-fqdn                         "katello01.example.local"\
