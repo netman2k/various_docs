@@ -53,15 +53,38 @@ yum install pulp-server python-gofer-qpid python-qpid qpid-tools -y
 ```
 
 ## Install support for different content via plugins
+**RPM plugin**
 ```
-yum install pulp-rpm-plugins pulp-puppet-plugins pulp-docker-plugins -y
+yum install pulp-rpm-plugins -y
 ```
 
-Install admin client
+**Puppet plugin**
+```
+yum install pulp-puppet-plugins -y
+```
+
+**Docker plugin**
+```
+yum install pulp-docker-plugins -y
+```
+
+## Install admin client
+
 ```
 yum install pulp-admin-client pulp-rpm-admin-extensions \
 pulp-puppet-admin-extensions pulp-docker-admin-extensions -y
 ```
+
+**client for Puppet**
+```
+yum install pulp-puppet-admin-extensions -y
+```
+
+**client for Docker**
+```
+yum install pulp-docker-admin-extensions -y
+```
+
 
 ## Edit /etc/pulp/server.conf 
 
@@ -80,7 +103,7 @@ pulp-gen-ca-certificate
 sudo -u apache pulp-manage-db
 ```
 
-## Disable SSLv3
+## (Optional) Disable SSLv3
 ```
 sed -i 's/^\(SSLProtocol all -SSLv2\)$/\1 -SSLv3/' /etc/httpd/conf.d/ssl.conf
 ```
@@ -100,6 +123,7 @@ systemctl start pulp_resource_manager && systemctl enable $_
 ## Set pulp client setting
 ```
 mkdir ~/.pulp
+chmod 0700 ~/.pulp
 cat <<EOF > ~/.pulp/admin.conf 
 [server]
 verify_ssl = False
@@ -112,7 +136,9 @@ EOF
 
 chmod 600 ~/.pulp/admin.conf
 ```
+
 [Repositoies](https://docs.pulpproject.org/user-guide/admin-client/repositories.html)
+
 ## Create & Sync Repostories 
 [http://docs.pulpproject.org/plugins/pulp_rpm/user-guide/quick-start.html]
 
@@ -135,7 +161,7 @@ pulp-admin rpm repo publish run --repo-id=$REPO_ID
 
 ```
 ## Access URL
-> https://10.40.205.236/pulp/repos/centos/7/
+> https://IP/pulp/repos/centos/7/
 
 ## Sync Scheduling
 
