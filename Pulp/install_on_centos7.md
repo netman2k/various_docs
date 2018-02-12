@@ -71,8 +71,7 @@ yum install pulp-docker-plugins -y
 ## Install admin client
 
 ```
-yum install pulp-admin-client pulp-rpm-admin-extensions \
-pulp-puppet-admin-extensions pulp-docker-admin-extensions -y
+yum install pulp-admin-client pulp-rpm-admin-extensions -y
 ```
 
 **client for Puppet**
