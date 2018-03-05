@@ -11,8 +11,7 @@ yum install -y perl-Text-Unidecode perl-XML-Simple git bunzip2
 ```
 cd /usr/local/src
 git clone https://github.com/brdude/pulp_centos_errata_import.git
-cd /usr/local/src/pulp_centos_errata_import
-chmod +x errata_import.pl
+chmod +x /usr/local/src/pulp_centos_errata_import/errata_import.pl
  
 ln -s /usr/local/src/pulp_centos_errata_import/errata_import.pl /sbin/errata_import.pl
  
