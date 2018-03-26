@@ -1,4 +1,4 @@
-## Solve not enough entropy on virtual machine
+## Solve not enough entropy within virtual machine
 
 GPG와 같은 키를 생성 시 entropy가 부족해서 생성 시 시간이 많이 소모되는 경우가 있다.
 
